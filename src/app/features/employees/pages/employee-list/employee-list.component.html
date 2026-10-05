@@ -1,2 +1,34 @@
-<h1>Employees</h1>
-<p>Workforce Micro Frontend loaded successfully.</p>
+<section class="employee-page">
+
+  <h1>Employees</h1>
+
+  @if (loading()) {
+    <p>Loading employees...</p>
+  }
+
+  @if (error()) {
+    <p>{{ error() }}</p>
+  }
+
+  @if (!loading() && !error()) {
+
+    @if (employees().length === 0) {
+      <p>No employees found.</p>
+    } @else {
+
+      @for (employee of employees(); track employee.id) {
+        <div>
+          <strong>
+            {{ employee.employeeCode }} -
+            {{ employee.firstName }} {{ employee.lastName }}
+          </strong>
+
+          <p>{{ employee.email }}</p>
+          <p>Status: {{ employee.status }}</p>
+        </div>
+      }
+
+    }
+  }
+
+</section>
